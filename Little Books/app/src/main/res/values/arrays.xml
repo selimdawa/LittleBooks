@@ -1,0 +1,13 @@
+<resources>
+    <!-- LightMode Preference -->
+    <string-array name="reply_entries">
+        <item>@string/one_theme</item>
+        <item>@string/night_theme</item>
+    </string-array>
+
+    <string-array name="reply_values">
+        <item>ONE</item>
+        <item>NIGHT_ONE</item>
+    </string-array>
+
+</resources>

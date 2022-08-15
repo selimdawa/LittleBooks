@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#fff</color>
+    <color name="colorPrimaryDark">#000</color>
+    <color name="colorAccent">#000</color>
+
+    //Needed
+    <color name="image_profile">#e0e0e0</color>
+    <color name="basic_night">#434343</color>
+    <color name="dark">#000000</color>
+    <color name="black">#212121</color>
+    <color name="white">#ffffff</color>
+    <color name="red">#FF5252</color>
+    <color name="blue">#448AFF</color>
+    <color name="green">#A5D6A7</color>
+    <color name="overlay_dark_50">#80000000</color>
+    <color name="night_corner">#ef7462</color>
+    <color name="night_corner_2">#ed3559</color>
+    <color name="overlay_dark_20">#33000000</color>
+</resources>

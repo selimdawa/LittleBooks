@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">Little Books</string>
+    <string name="new_user_signup">SignUp</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="forget_password">Forget Password?</string>
+    <string name="register">Register</string>
+    <string name="email_example">abc@example.com</string>
+    <string name="welcome_to">Welcome to</string>
+    <string name="book_details">Book Details</string>
+    <string name="category">Category</string>
+    <string name="date">Date</string>
+    <string name="size">Size</string>
+    <string name="views">Views</string>
+    <string name="downloads">Downloads</string>
+    <string name="the_description">The Description</string>
+    <string name="Comments">Comments</string>
+    <string name="categories">Categories</string>
+    <string name="name">Name</string>
+    //Theme
+    <string name="one_theme">Day Mode</string>
+    <string name="night_theme">Night Mode</string>
+    //Needed
+    <string name="none_display">There are no items to display</string>
+    <string name="editors_choice">Editors Choice</string>
+    <string name="most_views">Most Views</string>
+    <string name="most_loves">Most Loves</string>
+    <string name="most_downloads">Most Downloads</string>
+    <string name="new_books">New Books</string>
+    <string name="settings">Settings</string>
+    <string name="home">Home</string>
+    <string name="followers_books">Followers books</string>
+    <string name="banner_home">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="all">All</string>
+    <string name="do_you_want_to_logout">Do you want to logout?</string>
+    <string name="no">NO</string>
+    <string name="yes">YES</string>
+    <string name="do_you_want_to_exit">Do you want to Exit ?</string>
+    <string name="about_app">The application was designed by "Flat Code"</string>
+    <string name="details_books">Details Book</string>
+    //Pages
+    <string name="favorites">Favorites</string>
+    <string name="explore_publishers">Explore Publishers</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="my_books">My Books</string>
+    <string name="privacy_policy">privacy Policy</string>
+    <string name="publishers_books">Publisher books</string>
+    <string name="ok">Ok</string>
+    <string name="choose_book">Choose Book</string>
+    <string name="add_new_book">Add new book</string>
+    <string name="edit_book">Edit Book</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="do_you_want_to_delete_the_book">Do you want to delete the book?</string>
+    <string name="comment">Comment</string>
+    <string name="add_comment">Add Comment</string>
+    <string name="submit">Submit</string>
+    <string name="username">Username</string>
+    <string name="search">Search</string>
+    <string name="loves">Loves</string>
+    <string name="book_title">Book Title</string>
+    <string name="book_category">Book Category</string>
+
+    //Test AD's
+    <string name="admob_id">ca-app-pub-3940256099942544~3347511713</string>
+    <!--<string name="admob_banner_skin">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_banner_hair">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_banner_favorites">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_banner_shopping_centres">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_interstitial">ca-app-pub-3940256099942544/8691691433</string>
+    <string name="admob_reward">ca-app-pub-3940256099942544/5224354917</string>-->
+</resources>

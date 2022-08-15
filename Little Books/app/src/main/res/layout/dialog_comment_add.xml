@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorOnBackground"
+        android:padding="20sp">
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="25dp"
+            android:layout_height="25sp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_back_white"
+            app:tint="?colorError" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/back"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:paddingHorizontal="10sp"
+            android:text="@string/add_comment"
+            android:textAlignment="center"
+            android:textColor="?colorError"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/commentTil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/back"
+            android:layout_marginTop="10sp"
+            app:hintEnabled="false">
+
+            <EditText
+                android:id="@+id/comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button3"
+                android:drawableStart="@drawable/ic_comment_black"
+                android:drawablePadding="10sp"
+                android:hint="@string/comment"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLength="50"
+                android:padding="15sp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/commentTil"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10sp"
+            android:background="@drawable/button6"
+            android:gravity="center"
+            android:text="@string/submit"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+</layout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.flatcode.littlebooksadmin">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/logo"
+        android:supportsRtl="false"
+        android:theme="@style/OneTheme"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:supportsRtl">
+        <activity
+            android:name=".Activity.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity.ProfileEditActivity" />
+        <activity android:name=".Activity.ProfileActivity" />
+        <activity android:name=".Activity.BookViewActivity" />
+        <activity android:name=".Activity.BookDetailsActivity" />
+        <activity android:name=".Activity.BookEditActivity" />
+        <activity android:name=".Activity.BookAddActivity" />
+        <activity android:name=".Activity.MainActivity" />
+        <activity android:name=".Auth.LoginActivity" />
+        <activity android:name=".Activity.BooksCategoryActivity" />
+        <activity android:name=".Activity.PrivacyPolicyActivity" />
+        <activity android:name=".Activity.FavoritesActivity" />
+        <activity android:name=".Activity.ProfileInfoActivity" />
+        <activity android:name=".Activity.MyBooksActivity" />
+        <activity android:name=".Activity.FollowingActivity" />
+        <activity android:name=".Activity.FollowersActivity" />
+        <activity android:name=".Activity.SliderShowActivity" />
+        <activity android:name=".Activity.CategoryAddActivity" />
+        <activity android:name=".Activity.AllBooksActivity" />
+        <activity android:name=".Activity.ADsActivity" />
+        <activity android:name=".Activity.EditorsChoiceActivity" />
+        <activity android:name=".Activity.CategoriesActivity" />
+        <activity android:name=".Activity.TopPublishersActivity" />
+        <activity android:name=".Activity.UsersActivity" />
+        <activity android:name=".Auth.ForgetPasswordActivity" />
+        <activity android:name=".Activity.CategoryEditActivity" />
+        <activity android:name=".Activity.PrivacyPolicyEditActivity" />
+        <activity android:name=".Activity.EditorsChoiceAddActivity" />
+        <activity android:name=".Activity.AdsInfoActivity" />
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
+    </application>
+
+</manifest>

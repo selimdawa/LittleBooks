@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ListPreference
+        app:defaultValue="ONE"
+        app:entries="@array/reply_entries"
+        app:entryValues="@array/reply_values"
+        app:key="color_option" />
+
+</PreferenceScreen>

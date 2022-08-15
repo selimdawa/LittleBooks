@@ -1,0 +1,51 @@
+<resources>
+    <!-- Start application theme. -->
+    <style name="OneTheme" parent="Base.AppCompat.OneTheme" />
+
+    <style name="Base.AppCompat.OneTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--  <item name="android:windowFullscreen">true</item>  -->
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="color">@color/white</item>
+        <item name="background">@drawable/gradient</item>
+        <item name="tickColor">@color/night_corner_2</item>
+        <item name="trackColor">@color/night_corner</item>
+        <item name="colorOnBackground">@color/white</item>
+        <item name="colorError">@color/dark</item>
+        <item name="colorOnError">@color/night_corner_2</item>
+    </style>
+
+    <!-- Night application theme. -->
+    <style name="OneNightTheme" parent="Base.AppCompat.OneNightTheme" />
+
+    <style name="Base.AppCompat.OneNightTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--  <item name="android:windowFullscreen">true</item>  -->
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="color">@color/white</item>
+        <item name="background">@color/basic_night</item>
+        <item name="tickColor">@color/basic_night</item>
+        <item name="trackColor">@color/basic_night</item>
+        <item name="colorOnBackground">@color/dark</item>
+        <item name="colorError">@color/white</item>
+        <item name="colorOnError">@color/dark</item>
+    </style>
+
+    <!--style for ripple library-->
+    <style name="RippleStyleWhite">
+        <item name="mrl_rippleOverlay">true</item>
+        <item name="mrl_rippleColor">@color/image_profile</item>
+        <item name="mrl_rippleHover">true</item>
+        <item name="mrl_rippleAlpha">0.2</item>
+    </style>
+
+    <style name="CustomDialog" parent="android:Theme.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+</resources>

@@ -1,0 +1,78 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+}
+android {
+    compileSdk 33
+    //buildToolsVersion "33.0.3"
+
+    defaultConfig {
+        applicationId "com.flatcode.littlebooks"
+        minSdk 23
+        targetSdk 33
+        versionCode 2
+        versionName "1.1"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        release {
+            storeFile file('D:\\MyProjects\\Java\\Little Books\\Little Books\\LittleBooks.jks')
+            storePassword '00000000'
+            keyAlias = 'LittleBooks'
+            keyPassword '00000000'
+        }
+    }
+    buildTypes {
+        release {
+            //minifyEnabled false
+            //proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_11
+            targetCompatibility JavaVersion.VERSION_11
+        }
+
+        buildFeatures {
+            dataBinding true
+        }
+    }
+    namespace 'com.flatcode.littlebooks'
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.4.2'                //Appcompat for class
+    implementation 'androidx.preference:preference:1.2.0'              //Shared preference
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    //Layout
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'  //Constraint Layout
+    implementation 'com.google.android.material:material:1.6.1'        //Material
+    implementation 'androidx.cardview:cardview:1.0.0'                  //Card View
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'           //Legacy View
+    //Firebase
+    implementation platform('com.google.firebase:firebase-bom:30.1.0') //Firebase BOM
+    implementation 'com.google.firebase:firebase-auth'                 //Firebase Auth
+    implementation 'com.google.firebase:firebase-database'             //Firebase Database
+    implementation 'com.google.firebase:firebase-storage'              //Firebase Storage
+    implementation 'com.google.firebase:firebase-analytics'            //Firebase Analytics
+    implementation 'com.google.firebase:firebase-crashlytics'          //Firebase Crashlytics
+    //Ads
+    implementation 'com.google.android.gms:play-services-ads:19.6.0'   //ADs Google AdMob
+    //Pdf
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'      //Pdf view
+    //Image
+    implementation 'de.hdodenhof:circleimageview:3.1.0'                //Circle image
+    implementation 'com.github.bumptech.glide:glide:4.12.0'            //Glide image
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'    //Glide compiler
+    implementation 'com.balysv:material-ripple:1.0.2'                  //Ripple effect
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'           //Image Crop
+    implementation 'com.github.smarteist:autoimageslider:1.3.2'        //Slider Show
+    implementation 'jp.wasabeef:glide-transformations:4.0.0'           //Image Blur
+    //Bottom Navigation
+    implementation 'com.etebarian:meow-bottom-navigation-java:1.2.0'   //Meow Bottom Navigation
+}
