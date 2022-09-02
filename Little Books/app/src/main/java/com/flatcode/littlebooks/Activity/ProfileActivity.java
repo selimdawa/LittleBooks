@@ -43,12 +43,6 @@ public class ProfileActivity extends AppCompatActivity {
         Intent intent = getIntent();
         profileId = intent.getStringExtra(DATA.PROFILE_ID);
 
-        loadUserInfo();
-        getNrBooks();
-        nrItemFollow(DATA.FOLLOWERS, binding.numberFollowers);
-        nrItemFollow(DATA.FOLLOWING, binding.numberFollowing);
-        nrItemFavorites();
-
         if (profileId.equals(DATA.FirebaseUserUid)) {
             binding.follow.setVisibility(View.GONE);
             binding.editOrInfo.setImageResource(R.drawable.ic_edit_white);
@@ -78,21 +72,29 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
+    private void init() {
+        loadUserInfo();
+        getNrBooks();
+        nrItemFollow(DATA.FOLLOWERS, binding.numberFollowers);
+        nrItemFollow(DATA.FOLLOWING, binding.numberFollowing);
+        nrItemFavorites();
+    }
+
     private void loadUserInfo() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DATA.USERS);
         reference.child(profileId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String email = DATA.EMPTY + snapshot.child(DATA.EMAIL).getValue();
+                //String email = DATA.EMPTY + snapshot.child(DATA.EMAIL).getValue();
                 String username = DATA.EMPTY + snapshot.child(DATA.USER_NAME).getValue();
                 String profileImage = DATA.EMPTY + snapshot.child(DATA.PROFILE_IMAGE).getValue();
-                String timestamp = DATA.EMPTY + snapshot.child(DATA.TIMESTAMP).getValue();
-                String id = DATA.EMPTY + snapshot.child(DATA.ID).getValue();
-                String version = DATA.EMPTY + snapshot.child(DATA.VERSION).getValue();
+                //String timestamp = DATA.EMPTY + snapshot.child(DATA.TIMESTAMP).getValue();
+                //String id = DATA.EMPTY + snapshot.child(DATA.ID).getValue();
+                //String version = DATA.EMPTY + snapshot.child(DATA.VERSION).getValue();
 
                 binding.username.setText(username);
 
-                VOID.Glide(true,context, profileImage, binding.profile);
+                VOID.Glide(true, context, profileImage, binding.profile);
             }
 
             @Override
@@ -176,5 +178,17 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        init();
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        init();
+        super.onRestart();
     }
 }

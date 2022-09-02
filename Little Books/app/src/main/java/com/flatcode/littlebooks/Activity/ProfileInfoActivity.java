@@ -112,11 +112,6 @@ public class ProfileInfoActivity extends AppCompatActivity {
             type = DATA.DOWNLOADS_COUNT;
             getData(type);
         });
-
-        isCheck = true;
-        if (isCheck) {
-            getData(DATA.TIMESTAMP);
-        }
     }
 
     private void getData(String orderBy) {
@@ -163,5 +158,23 @@ public class ProfileInfoActivity extends AppCompatActivity {
             binding.toolbar.textSearch.setText(DATA.EMPTY);
         } else
             super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        isCheck = true;
+        if (isCheck) {
+            getData(DATA.TIMESTAMP);
+        }
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        isCheck = true;
+        if (isCheck) {
+            getData(DATA.TIMESTAMP);
+        }
+        super.onRestart();
     }
 }

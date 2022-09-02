@@ -37,7 +37,6 @@ public class PrivacyPolicyActivity extends AppCompatActivity {
         binding.edit.setOnClickListener(v -> VOID.Intent(context, CLASS.PRIVACY_POLICY_EDIT));
 
         VOID.Logo(context, binding.logo);
-        privacyPolicy();
     }
 
     private void privacyPolicy() {
@@ -56,5 +55,17 @@ public class PrivacyPolicyActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        privacyPolicy();
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        privacyPolicy();
+        super.onRestart();
     }
 }

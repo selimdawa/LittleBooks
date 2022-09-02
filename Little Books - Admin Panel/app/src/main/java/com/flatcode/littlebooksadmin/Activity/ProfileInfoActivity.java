@@ -108,11 +108,9 @@ public class ProfileInfoActivity extends AppCompatActivity {
             type = DATA.DOWNLOADS_COUNT;
             getData(type);
         });
-
-        getBooks(DATA.TIMESTAMP);
     }
 
-    private void getBooks(String orderBy) {
+    private void getData(String orderBy) {
         Query ref = FirebaseDatabase.getInstance().getReference(DATA.BOOKS);
         ref.orderByChild(orderBy).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -156,5 +154,17 @@ public class ProfileInfoActivity extends AppCompatActivity {
             binding.toolbar.textSearch.setText(DATA.EMPTY);
         } else
             super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        getData(type);
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        getData(type);
+        super.onRestart();
     }
 }

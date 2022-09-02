@@ -81,8 +81,6 @@ public class TopPublishersActivity extends AppCompatActivity {
         binding.recyclerView.setAdapter(adapter);
 
         binding.toolbar.back.setOnClickListener(v -> onBackPressed());
-
-        getTopPublisher(DATA.BOOKS_COUNT);
     }
 
     private void getTopPublisher(String orderBy) {
@@ -129,5 +127,17 @@ public class TopPublishersActivity extends AppCompatActivity {
             binding.toolbar.textSearch.setText(DATA.EMPTY);
         } else
             super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        getTopPublisher(DATA.BOOKS_COUNT);
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        getTopPublisher(DATA.BOOKS_COUNT);
+        super.onRestart();
     }
 }

@@ -87,6 +87,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                U = 0;
+                P = 0;
+                AD = 0;
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     User item = data.getValue(User.class);
                     assert item != null;
@@ -106,6 +109,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        B = 0;
+                        M = 0;
+                        E = 0;
                         for (DataSnapshot data : dataSnapshot.getChildren()) {
                             Book item = data.getValue(Book.class);
                             assert item != null;
@@ -132,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        CA = 0;
                         for (DataSnapshot data : dataSnapshot.getChildren()) {
                             Book item = data.getValue(Book.class);
                             assert item != null;
@@ -154,6 +161,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        S = 0;
                         S = (int) dataSnapshot.getChildrenCount();
                         nrFollowers();
                     }
@@ -170,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                         .child(DATA.FirebaseUserUid).child(DATA.FOLLOWERS);
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {FS = 0;
                         FS = (int) dataSnapshot.getChildrenCount();
                         nrFollowing();
                     }
@@ -188,6 +196,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        FN = 0;
                         FN = (int) dataSnapshot.getChildrenCount();
                         nrFavorites();
                     }
@@ -204,6 +213,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        FA = 0;
                         FA = (int) dataSnapshot.getChildrenCount();
                         IdeaPosts(U, P, M, B, S, FS, FN, FA, AD, E, CA);
                     }
@@ -299,4 +309,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }
     }
     // Color Mode -------------------------------- End
+
+    @Override
+    protected void onResume() {
+        userInfo();
+        nrItems();
+        super.onResume();
+    }
 }

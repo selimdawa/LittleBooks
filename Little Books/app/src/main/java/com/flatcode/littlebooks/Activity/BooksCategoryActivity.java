@@ -111,8 +111,6 @@ public class BooksCategoryActivity extends AppCompatActivity {
             type = DATA.DOWNLOADS_COUNT;
             getData(type);
         });
-
-        getData(type);
     }
 
     private void getData(String orderBy) {
@@ -159,5 +157,17 @@ public class BooksCategoryActivity extends AppCompatActivity {
             binding.toolbar.textSearch.setText(DATA.EMPTY);
         } else
             super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        getData(type);
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        getData(type);
+        super.onRestart();
     }
 }

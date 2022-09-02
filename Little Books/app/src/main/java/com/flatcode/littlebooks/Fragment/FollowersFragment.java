@@ -65,8 +65,6 @@ public class FollowersFragment extends Fragment {
             getData(type);
         });
 
-        getData(DATA.TIMESTAMP);
-
         return binding.getRoot();
     }
 
@@ -121,5 +119,11 @@ public class FollowersFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        getData(DATA.TIMESTAMP);
+        super.onResume();
     }
 }

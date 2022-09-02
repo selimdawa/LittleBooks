@@ -35,7 +35,6 @@ public class PrivacyPolicyActivity extends AppCompatActivity {
         binding.toolbar.back.setOnClickListener(v -> onBackPressed());
 
         VOID.Logo(context,binding.logo);
-        privacyPolicy();
     }
 
     private void privacyPolicy() {
@@ -53,5 +52,17 @@ public class PrivacyPolicyActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        privacyPolicy();
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        privacyPolicy();
+        super.onRestart();
     }
 }

@@ -69,13 +69,6 @@ public class BookDetailsActivity extends AppCompatActivity {
         dialog.setTitle("Please wait...");
         dialog.setCanceledOnTouchOutside(false);
 
-        loadBookDetails();
-        loadComments();
-        VOID.incrementBookViewCount(bookId);
-        VOID.isLoves(binding.love, bookId);
-        VOID.nrLoves(binding.loves, bookId);
-        VOID.isFavorite(binding.favorite, bookId, DATA.FirebaseUserUid);
-
         binding.love.setOnClickListener(v -> VOID.checkLove(binding.love, bookId));
         binding.favorite.setOnClickListener(v -> VOID.checkFavorite(binding.favorite, bookId));
         binding.toolbar.back.setOnClickListener(v -> onBackPressed());
@@ -96,6 +89,15 @@ public class BookDetailsActivity extends AppCompatActivity {
                 addCommentDialog();
             }
         });
+    }
+
+    private void init() {
+        loadBookDetails();
+        loadComments();
+        VOID.incrementBookViewCount(bookId);
+        VOID.isLoves(binding.love, bookId);
+        VOID.nrLoves(binding.loves, bookId);
+        VOID.isFavorite(binding.favorite, bookId, DATA.FirebaseUserUid);
     }
 
     private void loadComments() {
@@ -242,5 +244,17 @@ public class BookDetailsActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        init();
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        init();
+        super.onRestart();
     }
 }

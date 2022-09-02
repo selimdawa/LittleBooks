@@ -98,11 +98,9 @@ public class MoreBooksActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         binding.toolbar.back.setOnClickListener(v -> onBackPressed());
-
-        getBooks(type);
     }
 
-    private void getBooks(String orderBy) {
+    private void getData(String orderBy) {
         Query ref = FirebaseDatabase.getInstance().getReference(DATA.BOOKS);
         ref.orderByChild(orderBy).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -147,5 +145,17 @@ public class MoreBooksActivity extends AppCompatActivity {
             binding.toolbar.textSearch.setText(DATA.EMPTY);
         } else
             super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        getData(type);
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        getData(type);
+        super.onRestart();
     }
 }

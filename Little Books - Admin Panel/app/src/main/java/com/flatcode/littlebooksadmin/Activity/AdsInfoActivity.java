@@ -52,9 +52,6 @@ public class AdsInfoActivity extends AppCompatActivity {
         list = new ArrayList<>();
         adapter = new ADsInfoAdapter(context, list, true);
         binding.recyclerView.setAdapter(adapter);
-
-        loadUserInfo();
-        loadAds(DATA.NAME);
     }
 
     private void loadUserInfo() {
@@ -104,5 +101,19 @@ public class AdsInfoActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        loadUserInfo();
+        loadAds(DATA.NAME);
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        loadUserInfo();
+        loadAds(DATA.NAME);
+        super.onRestart();
     }
 }

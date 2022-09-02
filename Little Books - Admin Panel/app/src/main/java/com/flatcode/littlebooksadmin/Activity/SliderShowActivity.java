@@ -138,9 +138,6 @@ public class SliderShowActivity extends AppCompatActivity {
             VOID.CropImageSlider(activity);
             IMAGE_NUMBER = 20;
         });
-
-        getNrSliderShow();
-        SliderShow();
     }
 
     private void getNrSliderShow() {
@@ -396,5 +393,19 @@ public class SliderShowActivity extends AppCompatActivity {
                 Toast.makeText(this, "Error! " + error, Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        getNrSliderShow();
+        SliderShow();
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        getNrSliderShow();
+        SliderShow();
+        super.onRestart();
     }
 }

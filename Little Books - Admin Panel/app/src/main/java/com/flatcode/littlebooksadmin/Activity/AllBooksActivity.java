@@ -105,8 +105,6 @@ public class AllBooksActivity extends AppCompatActivity {
             type = DATA.DOWNLOADS_COUNT;
             getData(type);
         });
-
-        getData(DATA.TIMESTAMP);
     }
 
     private void getData(String orderBy) {
@@ -153,5 +151,17 @@ public class AllBooksActivity extends AppCompatActivity {
             binding.toolbar.textSearch.setText(DATA.EMPTY);
         } else
             super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        getData(type);
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        getData(type);
+        super.onRestart();
     }
 }

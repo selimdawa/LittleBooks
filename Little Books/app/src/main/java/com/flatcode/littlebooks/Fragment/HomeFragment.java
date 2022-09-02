@@ -118,14 +118,16 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        return binding.getRoot();
+    }
+
+    private void init() {
         loadCategories();
         loadPostEditorsChoice(DATA.EDITORS_CHOICE, list, adapter, binding.bar, binding.recyclerView, binding.empty);
         loadPostBy(DATA.VIEWS_COUNT, list2, adapter2, binding.bar2, binding.recyclerView2, binding.empty2);
         loadPostBy(DATA.LOVES_COUNT, list3, adapter3, binding.bar3, binding.recyclerView3, binding.empty3);
         loadPostBy(DATA.DOWNLOADS_COUNT, list4, adapter4, binding.bar4, binding.recyclerView4, binding.empty4);
         loadPostBy(DATA.TIMESTAMP, list5, adapter5, binding.bar5, binding.recyclerView5, binding.empty5);
-
-        return binding.getRoot();
     }
 
     private void loadCategories() {
@@ -214,5 +216,11 @@ public class HomeFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        init();
+        super.onResume();
     }
 }

@@ -38,8 +38,6 @@ public class EditorsChoiceActivity extends AppCompatActivity {
         list = new ArrayList<>();
         adapter = new EditorsChoiceAdapter(context, list);
         binding.recyclerView.setAdapter(adapter);
-
-        IdeaPosts();
     }
 
     public void IdeaPosts() {
@@ -54,5 +52,17 @@ public class EditorsChoiceActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        IdeaPosts();
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        IdeaPosts();
+        super.onRestart();
     }
 }

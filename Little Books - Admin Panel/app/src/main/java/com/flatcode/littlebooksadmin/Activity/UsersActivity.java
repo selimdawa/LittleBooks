@@ -94,8 +94,6 @@ public class UsersActivity extends AppCompatActivity {
             type = DATA.LOVES_COUNT;
             getData(DATA.PUBLISHER);
         });
-
-        getData(DATA.ALL);
     }
 
     private void getData(String type) {
@@ -155,5 +153,17 @@ public class UsersActivity extends AppCompatActivity {
             binding.toolbar.textSearch.setText(DATA.EMPTY);
         } else
             super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        getData(DATA.ALL);
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        getData(DATA.ALL);
+        super.onRestart();
     }
 }

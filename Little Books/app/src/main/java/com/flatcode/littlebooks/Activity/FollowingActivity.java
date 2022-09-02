@@ -86,8 +86,6 @@ public class FollowingActivity extends AppCompatActivity {
         binding.recyclerView.setAdapter(adapter);
 
         binding.toolbar.back.setOnClickListener(v -> onBackPressed());
-
-        getData();
     }
 
     private void getData() {
@@ -157,5 +155,17 @@ public class FollowingActivity extends AppCompatActivity {
             binding.toolbar.textSearch.setText(DATA.EMPTY);
         } else
             super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        getData();
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        getData();
+        super.onRestart();
     }
 }

@@ -1,5 +1,8 @@
 package com.flatcode.littlebooksadmin.Activity;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
@@ -26,9 +29,6 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
 
 public class FavoritesActivity extends AppCompatActivity {
 
@@ -107,8 +107,6 @@ public class FavoritesActivity extends AppCompatActivity {
             type = DATA.DOWNLOADS_COUNT;
             getData(type);
         });
-
-        getData(type);
     }
 
     private void getData(String orderBy) {
@@ -178,5 +176,17 @@ public class FavoritesActivity extends AppCompatActivity {
             binding.toolbar.textSearch.setText(DATA.EMPTY);
         } else
             super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        getData(type);
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        getData(type);
+        super.onRestart();
     }
 }

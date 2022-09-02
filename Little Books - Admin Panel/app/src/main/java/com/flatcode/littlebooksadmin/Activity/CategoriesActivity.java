@@ -81,8 +81,6 @@ public class CategoriesActivity extends AppCompatActivity {
         binding.recyclerView.setAdapter(adapter);
 
         binding.toolbar.back.setOnClickListener(v -> onBackPressed());
-
-        getCategories(DATA.CATEGORY);
     }
 
     private void getCategories(String orderBy) {
@@ -127,5 +125,17 @@ public class CategoriesActivity extends AppCompatActivity {
             binding.toolbar.textSearch.setText(DATA.EMPTY);
         } else
             super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        getCategories(DATA.CATEGORY);
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        getCategories(DATA.CATEGORY);
+        super.onRestart();
     }
 }

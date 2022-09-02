@@ -47,9 +47,6 @@ public class SettingsFragment extends Fragment {
         binding.toolbar.item.setOnClickListener(v ->
                 VOID.IntentExtra(getContext(), CLASS.PROFILE, DATA.PROFILE_ID, DATA.FirebaseUserUid));
 
-        loadUserInfo();
-        nrItems();
-
         return binding.getRoot();
     }
 
@@ -60,6 +57,7 @@ public class SettingsFragment extends Fragment {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                E = 0;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     User item = snapshot.getValue(User.class);
                     assert item != null;
@@ -75,6 +73,7 @@ public class SettingsFragment extends Fragment {
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        M = 0;
                         for (DataSnapshot data : dataSnapshot.getChildren()) {
                             Book item = data.getValue(Book.class);
                             assert item != null;
@@ -97,6 +96,7 @@ public class SettingsFragment extends Fragment {
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        FS = 0;
                         FS = (int) dataSnapshot.getChildrenCount();
                         nrFollowing();
                     }
@@ -114,6 +114,7 @@ public class SettingsFragment extends Fragment {
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        FN = 0;
                         FN = (int) dataSnapshot.getChildrenCount();
                         nrFavorites();
                     }
@@ -130,6 +131,7 @@ public class SettingsFragment extends Fragment {
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        FA = 0;
                         FA = (int) dataSnapshot.getChildrenCount();
                         loadSettings(E, M, FS, FN, FA);
                     }
@@ -197,5 +199,12 @@ public class SettingsFragment extends Fragment {
         list.add(item11);
         list.add(item12);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onResume() {
+        loadUserInfo();
+        nrItems();
+        super.onResume();
     }
 }
