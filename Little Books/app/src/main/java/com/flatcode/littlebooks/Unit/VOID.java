@@ -487,7 +487,7 @@ public class VOID {
     }
 
     public static void isFavorite(final ImageView add, final String Id, final String UserId) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child(DATA.FAVORITES).child(UserId);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DATA.FAVORITES).child(UserId);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

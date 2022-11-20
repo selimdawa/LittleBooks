@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.flatcode.littlebooksadmin.Model.Comment;
+import com.flatcode.littlebooksadmin.Model.User;
 import com.flatcode.littlebooksadmin.MyApplication;
 import com.flatcode.littlebooksadmin.Unit.DATA;
 import com.flatcode.littlebooksadmin.Unit.VOID;
@@ -77,7 +78,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                     ref.child(bookId).child(DATA.COMMENTS).child(commentId).removeValue()
                             .addOnSuccessListener(unused -> Toast.makeText(context,
                                     "Deleted...", Toast.LENGTH_SHORT).show()).addOnFailureListener(e ->
-                            Toast.makeText(context, "Failed to delete duo to " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                    Toast.makeText(context, "Failed to delete duo to " + e.getMessage(), Toast.LENGTH_SHORT).show());
                 }).setNegativeButton("CANCEL", (dialog, which) -> dialog.dismiss()).show();
     }
 
@@ -104,14 +105,18 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     private void loadUserDetails(String publisher, TextView name) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(DATA.USERS);
-        ref.child(publisher).addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String username = DATA.EMPTY + snapshot.child(DATA.USER_NAME).getValue();
-                String profileImage = DATA.EMPTY + snapshot.child(DATA.PROFILE_IMAGE).getValue();
+                if (snapshot.child(publisher).exists()) {
+                    User item = snapshot.getValue(User.class);
+                    assert item != null;
+                    String username = item.getUsername();
+                    String profileImage = item.getProfileImage();
 
-                VOID.Glide(true, context, profileImage, binding.profile);
-                name.setText(username);
+                    VOID.Glide(true, context, profileImage, binding.profile);
+                    name.setText(username);
+                }
             }
 
             @Override

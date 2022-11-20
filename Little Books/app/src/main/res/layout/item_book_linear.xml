@@ -80,11 +80,11 @@
                         android:layout_width="0sp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:layout_marginHorizontal="5sp"
                         android:layout_weight="1"
                         android:gravity="start|center"
                         android:maxLines="1"
-                        android:paddingHorizontal="5sp"
+                        android:paddingHorizontal="10sp"
+                        android:paddingTop="5sp"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold" />

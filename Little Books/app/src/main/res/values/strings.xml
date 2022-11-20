@@ -31,7 +31,6 @@
     <string name="settings">Settings</string>
     <string name="home">Home</string>
     <string name="followers_books">Followers books</string>
-    <string name="banner_home">ca-app-pub-3940256099942544/6300978111</string>
     <string name="all">All</string>
     <string name="do_you_want_to_logout">Do you want to logout?</string>
     <string name="no">NO</string>
@@ -61,13 +60,7 @@
     <string name="loves">Loves</string>
     <string name="book_title">Book Title</string>
     <string name="book_category">Book Category</string>
-
     //Test AD's
     <string name="admob_id">ca-app-pub-3940256099942544~3347511713</string>
-    <!--<string name="admob_banner_skin">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="admob_banner_hair">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="admob_banner_favorites">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="admob_banner_shopping_centres">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="admob_interstitial">ca-app-pub-3940256099942544/8691691433</string>
-    <string name="admob_reward">ca-app-pub-3940256099942544/5224354917</string>-->
+    <string name="banner_home">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

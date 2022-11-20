@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".MyApplication"
@@ -17,7 +16,8 @@
         android:supportsRtl="false"
         android:theme="@style/OneTheme"
         android:usesCleartextTraffic="true"
-        tools:replace="android:supportsRtl">
+        tools:replace="android:supportsRtl"
+        tools:targetApi="33">
         <activity
             android:name=".Activity.SplashActivity"
             android:exported="true">

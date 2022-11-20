@@ -50,7 +50,6 @@ public class CategoriesFragment extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Category item = snapshot.getValue(Category.class);
                     assert item != null;
-                    if (item.getPublisher().equals(DATA.FirebaseUserUid))
                         list.add(item);
                 }
                 binding.bar.setVisibility(View.GONE);

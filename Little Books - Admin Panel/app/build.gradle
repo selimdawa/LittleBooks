@@ -3,6 +3,7 @@ plugins {
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
 }
+
 android {
     compileSdk 33
     //buildToolsVersion "33.0.3"
@@ -38,8 +39,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.2'                //Appcompat for class
     implementation 'androidx.preference:preference:1.2.0'              //Shared preference
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     //Layout
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'  //Constraint Layout
     implementation 'com.google.android.material:material:1.6.1'        //Material

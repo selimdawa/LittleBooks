@@ -54,6 +54,7 @@ public class PublisherAdapter extends RecyclerView.Adapter<PublisherAdapter.View
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
         final User item = list.get(position);
+        String id = item.getId();
 
         VOID.Glide(true, context, item.getProfileImage(), holder.image);
 
@@ -64,32 +65,32 @@ public class PublisherAdapter extends RecyclerView.Adapter<PublisherAdapter.View
             holder.username.setText(item.getUsername());
         }
 
-        if (item.getId().equals(DATA.FirebaseUserUid)) {
+        if (id.equals(DATA.FirebaseUserUid)) {
             holder.add.setVisibility(View.GONE);
         } else {
             holder.add.setVisibility(View.VISIBLE);
         }
 
-        NrFollowers(holder.numberFollowers, item.getId());
-        NrBooks(holder.numberBooks, item.getId());
-        isFollowing(holder.add, item.getId());
+        NrFollowers(holder.numberFollowers, id);
+        NrBooks(holder.numberBooks, id);
+        isFollowing(holder.add, id);
 
         holder.add.setOnClickListener(view -> {
             if (holder.add.getTag().equals("add")) {
                 FirebaseDatabase.getInstance().getReference().child(DATA.FOLLOW).child(DATA.FirebaseUserUid)
-                        .child(DATA.FOLLOWING).child(item.getId()).setValue(true);
-                FirebaseDatabase.getInstance().getReference().child(DATA.FOLLOW).child(item.getId())
+                        .child(DATA.FOLLOWING).child(id).setValue(true);
+                FirebaseDatabase.getInstance().getReference().child(DATA.FOLLOW).child(id)
                         .child(DATA.FOLLOWERS).child(DATA.FirebaseUserUid).setValue(true);
             } else {
                 FirebaseDatabase.getInstance().getReference().child(DATA.FOLLOW).child(DATA.FirebaseUserUid)
-                        .child(DATA.FOLLOWING).child(item.getId()).removeValue();
-                FirebaseDatabase.getInstance().getReference().child(DATA.FOLLOW).child(item.getId())
+                        .child(DATA.FOLLOWING).child(id).removeValue();
+                FirebaseDatabase.getInstance().getReference().child(DATA.FOLLOW).child(id)
                         .child(DATA.FOLLOWERS).child(DATA.FirebaseUserUid).removeValue();
             }
         });
 
         holder.item.setOnClickListener(view ->
-                VOID.IntentExtra(context, CLASS.PROFILE, DATA.PROFILE_ID, item.getId()));
+                VOID.IntentExtra(context, CLASS.PROFILE, DATA.PROFILE_ID, id));
     }
 
     @Override
@@ -125,7 +126,7 @@ public class PublisherAdapter extends RecyclerView.Adapter<PublisherAdapter.View
     private void isFollowing(final ImageView add, final String userId) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
                 .child(DATA.FOLLOW).child(DATA.FirebaseUserUid).child(DATA.FOLLOWING);
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child(userId).exists()) {

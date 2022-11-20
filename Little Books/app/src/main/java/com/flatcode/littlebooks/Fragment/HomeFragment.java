@@ -118,6 +118,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        init();
+
         return binding.getRoot();
     }
 
@@ -220,7 +222,7 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onResume() {
-        init();
+        //init();
         super.onResume();
     }
 }

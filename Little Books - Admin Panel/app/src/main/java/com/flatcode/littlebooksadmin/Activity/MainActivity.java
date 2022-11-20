@@ -70,14 +70,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         binding.toolbar.image.setOnClickListener(v ->
                 VOID.IntentExtra(context, CLASS.PROFILE, DATA.PROFILE_ID, DATA.FirebaseUserUid));
 
-        userInfo();
-
         binding.recyclerView.setHasFixedSize(true);
         list = new ArrayList<>();
         adapter = new MainAdapter(context, list);
         binding.recyclerView.setAdapter(adapter);
-
-        nrItems();
     }
 
     int U = 0, P = 0, M = 0, B = 0, S = 0, FS = 0, FN = 0, FA = 0, AD = 0, E = 0, CA = 0;
@@ -178,7 +174,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                         .child(DATA.FirebaseUserUid).child(DATA.FOLLOWERS);
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {FS = 0;
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        FS = 0;
                         FS = (int) dataSnapshot.getChildrenCount();
                         nrFollowing();
                     }
@@ -312,7 +309,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     @Override
     protected void onResume() {
-        userInfo();
+        //userInfo();
         nrItems();
         super.onResume();
     }

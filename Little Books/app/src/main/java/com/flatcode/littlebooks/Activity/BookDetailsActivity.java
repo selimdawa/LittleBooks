@@ -97,7 +97,7 @@ public class BookDetailsActivity extends AppCompatActivity {
         });
     }
 
-    private void init(){
+    private void init() {
         loadBookDetails();
         loadComments();
         VOID.incrementBookViewCount(bookId);
@@ -229,21 +229,23 @@ public class BookDetailsActivity extends AppCompatActivity {
     }
 
     private void userInfo(String userId) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(DATA.USERS).child(userId);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(DATA.USERS);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //get data
-                User item = snapshot.getValue(User.class);
-                assert item != null;
-                String userId = DATA.EMPTY + item.getId();
-                String imageProfile = DATA.EMPTY + item.getProfileImage();
-                String username = DATA.EMPTY + item.getUsername();
+                if (snapshot.child(userId).exists()) {
+                    User item = snapshot.getValue(User.class);
+                    assert item != null;
+                    String userId = DATA.EMPTY + item.getId();
+                    String imageProfile = DATA.EMPTY + item.getProfileImage();
+                    String username = DATA.EMPTY + item.getUsername();
 
-                binding.publisherName.setText(username);
-                VOID.Glide(true, context, imageProfile, binding.publisherImage);
+                    binding.publisherName.setText(username);
+                    VOID.Glide(true, context, imageProfile, binding.publisherImage);
 
-                binding.userInfo.setOnClickListener(v -> VOID.IntentExtra(context, CLASS.PROFILE, DATA.PROFILE_ID, userId));
+                    binding.userInfo.setOnClickListener(v -> VOID.IntentExtra(context, CLASS.PROFILE, DATA.PROFILE_ID, userId));
+                }
             }
 
             @Override

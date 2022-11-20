@@ -105,16 +105,18 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     private void loadUserDetails(String publisher, TextView name) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(DATA.USERS);
-        ref.child(publisher).addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User item = snapshot.getValue(User.class);
-                assert item != null;
-                String username = item.getUsername();
-                String profileImage = item.getProfileImage();
+                if (snapshot.child(publisher).exists()) {
+                    User item = snapshot.getValue(User.class);
+                    assert item != null;
+                    String username = item.getUsername();
+                    String profileImage = item.getProfileImage();
 
-                VOID.Glide(true, context, profileImage, binding.profile);
-                name.setText(username);
+                    VOID.Glide(true, context, profileImage, binding.profile);
+                    name.setText(username);
+                }
             }
 
             @Override
