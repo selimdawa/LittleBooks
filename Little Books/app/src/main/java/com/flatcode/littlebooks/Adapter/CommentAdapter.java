@@ -51,11 +51,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
         final Comment item = list.get(position);
 
-        String id = item.getId();
-        String bookId = item.getBookId();
-        String comment = item.getComment();
-        String publisher = item.getPublisher();
-        String timestamp = item.getTimestamp();
+        String id = DATA.EMPTY + item.getId();
+        String bookId = DATA.EMPTY + item.getBookId();
+        String comment = DATA.EMPTY + item.getComment();
+        String publisher = DATA.EMPTY + item.getPublisher();
+        String timestamp = DATA.EMPTY + item.getTimestamp();
 
         String date = MyApplication.formatTimestamp(Long.parseLong(timestamp));
 
@@ -78,7 +78,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                     ref.child(bookId).child(DATA.COMMENTS).child(commentId).removeValue()
                             .addOnSuccessListener(unused -> Toast.makeText(context,
                                     "Deleted...", Toast.LENGTH_SHORT).show()).addOnFailureListener(e ->
-                            Toast.makeText(context, "Failed to delete duo to " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                    Toast.makeText(context, "Failed to delete duo to " + e.getMessage(), Toast.LENGTH_SHORT).show());
                 }).setNegativeButton("CANCEL", (dialog, which) -> dialog.dismiss()).show();
     }
 
@@ -109,7 +109,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child(publisher).exists()) {
-                    User item = snapshot.getValue(User.class);
+                    User item = snapshot.child(publisher).getValue(User.class);
                     assert item != null;
                     String username = item.getUsername();
                     String profileImage = item.getProfileImage();

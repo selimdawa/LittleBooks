@@ -228,7 +228,7 @@ public class BookDetailsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //get data
                 if (snapshot.child(userId).exists()) {
-                    User item = snapshot.getValue(User.class);
+                    User item = snapshot.child(userId).getValue(User.class);
                     assert item != null;
                     String userId = DATA.EMPTY + item.getId();
                     String imageProfile = DATA.EMPTY + item.getProfileImage();

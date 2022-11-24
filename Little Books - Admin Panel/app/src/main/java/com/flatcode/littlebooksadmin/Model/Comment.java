@@ -2,13 +2,14 @@ package com.flatcode.littlebooksadmin.Model;
 
 public class Comment {
 
-    String id, bookId, timestamp, comment, publisher;
+    String id, bookId, comment, publisher;
+    Long timestamp;
 
     public Comment() {
 
     }
 
-    public Comment(String id, String bookId, String timestamp, String comment, String publisher) {
+    public Comment(String id, String bookId, Long timestamp, String comment, String publisher) {
         this.id = id;
         this.bookId = bookId;
         this.timestamp = timestamp;
@@ -32,11 +33,11 @@ public class Comment {
         this.bookId = bookId;
     }
 
-    public String getTimestamp() {
+    public Long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
     }
 

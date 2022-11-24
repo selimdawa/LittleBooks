@@ -51,11 +51,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
         final Comment item = list.get(position);
 
-        String commentId = item.getId();
-        String bookId = item.getId();
-        String comment = item.getComment();
-        String publisher = item.getPublisher();
-        String timestamp = item.getTimestamp();
+        String commentId = DATA.EMPTY + item.getId();
+        String bookId = DATA.EMPTY + item.getId();
+        String comment = DATA.EMPTY + item.getComment();
+        String publisher = DATA.EMPTY + item.getPublisher();
+        String timestamp = DATA.EMPTY + item.getTimestamp();
 
         String date = MyApplication.formatTimestamp(Long.parseLong(timestamp));
 
@@ -109,7 +109,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child(publisher).exists()) {
-                    User item = snapshot.getValue(User.class);
+                    User item = snapshot.child(publisher).getValue(User.class);
                     assert item != null;
                     String username = item.getUsername();
                     String profileImage = item.getProfileImage();
