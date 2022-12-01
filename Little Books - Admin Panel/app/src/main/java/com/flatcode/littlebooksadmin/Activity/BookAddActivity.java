@@ -133,7 +133,7 @@ public class BookAddActivity extends AppCompatActivity {
             dialog.dismiss();
             Toast.makeText(context, "Successfully uploaded...", Toast.LENGTH_SHORT).show();
         }).addOnCompleteListener(task -> {
-            VOID.incrementBooksPublisherCount(DATA.FirebaseUserUid);
+            VOID.incrementItemCount(DATA.USERS, DATA.FirebaseUserUid, DATA.BOOKS_COUNT);
             uploadImage(id);
         }).addOnFailureListener(e -> {
             dialog.dismiss();

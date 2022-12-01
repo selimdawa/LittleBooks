@@ -1,22 +1,5 @@
 package com.flatcode.littlebooksadmin.Unit;
 
-import static com.flatcode.littlebooksadmin.Unit.DATA.BASIC;
-import static com.flatcode.littlebooksadmin.Unit.DATA.BOOKS;
-import static com.flatcode.littlebooksadmin.Unit.DATA.BOOKS_COUNT;
-import static com.flatcode.littlebooksadmin.Unit.DATA.BOOK_ID;
-import static com.flatcode.littlebooksadmin.Unit.DATA.CATEGORIES;
-import static com.flatcode.littlebooksadmin.Unit.DATA.CATEGORY;
-import static com.flatcode.littlebooksadmin.Unit.DATA.DOWNLOADS_COUNT;
-import static com.flatcode.littlebooksadmin.Unit.DATA.EMPTY;
-import static com.flatcode.littlebooksadmin.Unit.DATA.FAVORITES;
-import static com.flatcode.littlebooksadmin.Unit.DATA.FirebaseUserUid;
-import static com.flatcode.littlebooksadmin.Unit.DATA.LOVES;
-import static com.flatcode.littlebooksadmin.Unit.DATA.LOVES_COUNT;
-import static com.flatcode.littlebooksadmin.Unit.DATA.MAX_BYTES_PDF;
-import static com.flatcode.littlebooksadmin.Unit.DATA.NULL;
-import static com.flatcode.littlebooksadmin.Unit.DATA.USERS;
-import static com.flatcode.littlebooksadmin.Unit.DATA.VIEWS_COUNT;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -95,12 +78,12 @@ public class VOID {
         StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(bookUrl);
         storageReference.delete().addOnSuccessListener(unused -> {
 
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference(BOOKS);
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DATA.BOOKS);
             reference.child(bookId).removeValue().addOnSuccessListener(unused1 -> {
                 dialog.dismiss();
                 Toast.makeText(context, "Books Deleted Successfully...", Toast.LENGTH_SHORT).show();
                 dialogDelete.dismiss();
-                incrementBooksPublisherRemoveCount(publisher);
+                incrementItemRemoveCount(DATA.USERS, publisher, DATA.BOOKS_COUNT);
             }).addOnFailureListener(e -> {
                 dialog.dismiss();
                 dialogDelete.dismiss();
@@ -119,7 +102,7 @@ public class VOID {
         dialog.setMessage("Deleting " + name + " ...");
         dialog.show();
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(CATEGORIES);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DATA.CATEGORIES);
         reference.child(id).removeValue().addOnSuccessListener(unused1 -> {
             dialog.dismiss();
             Toast.makeText(context, "category Deleted Successfully...", Toast.LENGTH_SHORT).show();
@@ -149,12 +132,12 @@ public class VOID {
     }
 
     public static void loadCategory(String categoryId, TextView category) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(CATEGORIES);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(DATA.CATEGORIES);
         ref.child(categoryId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                String Category = EMPTY + snapshot.child(CATEGORY).getValue();
+                String Category = DATA.EMPTY + snapshot.child(DATA.CATEGORY).getValue();
                 category.setText(Category);
             }
 
@@ -165,23 +148,22 @@ public class VOID {
         });
     }
 
-    public static void incrementBookViewCount(String bookId) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(BOOKS);
-        ref.child(bookId).addListenerForSingleValueEvent(new ValueEventListener() {
+    public static void incrementItemCount(String database, String id, String childDB) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(database);
+        ref.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //get views count
-                String viewsCount = EMPTY + snapshot.child(VIEWS_COUNT).getValue();
-                if (viewsCount.equals(EMPTY) || viewsCount.equals(NULL)) {
-                    viewsCount = "0";
-                }
+                String itemsCount = DATA.EMPTY + snapshot.child(childDB).getValue();
+                if (itemsCount.equals(DATA.EMPTY) || itemsCount.equals(DATA.NULL))
+                    itemsCount = DATA.EMPTY + DATA.ZERO;
 
-                long newViewsCount = Long.parseLong(viewsCount) + 1;
+                int newItemsCount = Integer.parseInt(itemsCount) + 1;
                 HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put(VIEWS_COUNT, newViewsCount);
+                hashMap.put(childDB, newItemsCount);
 
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(BOOKS);
-                reference.child(bookId).updateChildren(hashMap);
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(database);
+                reference.child(id).updateChildren(hashMap);
             }
 
             @Override
@@ -191,101 +173,25 @@ public class VOID {
         });
     }
 
-    public static void incrementBooksPublisherCount(String userId) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(USERS);
-        ref.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+    public static void incrementItemRemoveCount(String database, String id, String childDB) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(database);
+        ref.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //get views count
-                String booksCount = EMPTY + snapshot.child(BOOKS_COUNT).getValue();
-                if (booksCount.equals(EMPTY) || booksCount.equals(NULL)) {
-                    booksCount = "0";
+                String lovesCount = DATA.EMPTY + snapshot.child(childDB).getValue();
+                if (lovesCount.equals(DATA.EMPTY) || lovesCount.equals(DATA.NULL))
+                    lovesCount = DATA.EMPTY + DATA.ZERO;
+
+                int i = Integer.parseInt(lovesCount);
+                if (i > 0) {
+                    int removeLovesCount = Integer.parseInt(lovesCount) - 1;
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put(childDB, removeLovesCount);
+
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference(database);
+                    reference.child(id).updateChildren(hashMap);
                 }
-
-                long newBooksCount = Long.parseLong(booksCount) + 1;
-                HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put(BOOKS_COUNT, newBooksCount);
-
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(USERS);
-                reference.child(userId).updateChildren(hashMap);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    public static void incrementBooksPublisherRemoveCount(String userId) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(USERS);
-        ref.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //get views count
-                String booksCount = EMPTY + snapshot.child(BOOKS_COUNT).getValue();
-                if (booksCount.equals(EMPTY) || booksCount.equals(NULL)) {
-                    booksCount = "0";
-                }
-
-                long newBooksCount = Long.parseLong(booksCount) - 1;
-                HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put(BOOKS_COUNT, newBooksCount);
-
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(USERS);
-                reference.child(userId).updateChildren(hashMap);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    public static void incrementBookLovesCount(String bookId) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(BOOKS);
-        ref.child(bookId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //get views count
-                String lovesCount = EMPTY + snapshot.child(LOVES_COUNT).getValue();
-                if (lovesCount.equals(EMPTY) || lovesCount.equals(NULL)) {
-                    lovesCount = "0";
-                }
-
-                long newLovesCount = Long.parseLong(lovesCount) + 1;
-                HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put(LOVES_COUNT, newLovesCount);
-
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(BOOKS);
-                reference.child(bookId).updateChildren(hashMap);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    public static void incrementBookLovesRemoveCount(String bookId) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(BOOKS);
-        ref.child(bookId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //get views count
-                String lovesCount = EMPTY + snapshot.child("lovesCount").getValue();
-                if (lovesCount.equals(EMPTY) || lovesCount.equals(NULL)) {
-                    lovesCount = "0";
-                }
-
-                long removeLovesCount = Long.parseLong(lovesCount) - 1;
-                HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put("lovesCount", removeLovesCount);
-
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(BOOKS);
-                reference.child(bookId).updateChildren(hashMap);
             }
 
             @Override
@@ -296,7 +202,6 @@ public class VOID {
     }
 
     public static void downloadBook(Context context, String bookId, String bookTitle, String bookUrl) {
-
         String nameWithExtension = bookTitle + ".pdf";
 
         //progress dialog
@@ -308,9 +213,9 @@ public class VOID {
 
         //download from firebase storage using url
         StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(bookUrl);
-        storageReference.getBytes(MAX_BYTES_PDF).addOnSuccessListener(bytes -> {
+        storageReference.getBytes(DATA.MAX_BYTES_PDF).addOnSuccessListener(bytes -> {
             saveDownloadedBook(context, progressDialog, bytes, nameWithExtension, bookId);
-            incrementBookDownloadCount(bookId);
+            incrementItemCount(DATA.BOOKS, bookId, DATA.DOWNLOADS_COUNT);
         }).addOnFailureListener(e -> {
             progressDialog.dismiss();
             Toast.makeText(context, "Failed to download due to " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -318,7 +223,6 @@ public class VOID {
     }
 
     private static void saveDownloadedBook(Context context, ProgressDialog progressDialog, byte[] bytes, String nameWithExtension, String bookId) {
-
         try {
             File downloadsFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
             downloadsFolder.mkdirs();
@@ -332,46 +236,16 @@ public class VOID {
             Toast.makeText(context, "Saved to Download Folder", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
 
-            incrementBookDownloadCount(bookId);
+            incrementItemCount(DATA.BOOKS, bookId, DATA.DOWNLOADS_COUNT);
         } catch (Exception e) {
             Toast.makeText(context, "Failed saving to Download Folder due to " + e.getMessage(), Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         }
     }
 
-    private static void incrementBookDownloadCount(String bookId) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(BOOKS);
-        ref.child(bookId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                String downloadsCount = EMPTY + snapshot.child(DOWNLOADS_COUNT).getValue();
-
-                if (downloadsCount.equals(EMPTY) || downloadsCount.equals(NULL)) {
-                    downloadsCount = "0";
-                }
-
-                //convert to tong and increment 1
-                long newDownloadsCount = Long.parseLong(downloadsCount) + 1;
-                //setup data to update
-                HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put(DOWNLOADS_COUNT, newDownloadsCount);
-
-                //Step 2) Update new incremented downloads count to db
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(BOOKS);
-                reference.child(bookId).updateChildren(hashMap);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
     public static void Glide(Boolean isUser, Context context, String Url, ImageView Image) {
         try {
-            if (Url.equals(BASIC)) {
+            if (Url.equals(DATA.BASIC)) {
                 if (isUser) {
                     Image.setImageResource(R.drawable.basic_user);
                 } else {
@@ -385,31 +259,8 @@ public class VOID {
         }
     }
 
-    public static void dialogLogout(Context context) {
-        final Dialog dialog = new Dialog(context);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_logout);
-        dialog.setCancelable(true);
-        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(dialog.getWindow().getAttributes());
-        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-
-        dialog.findViewById(R.id.yes).setOnClickListener(v -> {
-            FirebaseAuth.getInstance().signOut();
-            IntentClear(context, CLASS.LOGIN);
-        });
-
-        dialog.findViewById(R.id.no).setOnClickListener(v -> dialog.cancel());
-
-        dialog.show();
-        Objects.requireNonNull(dialog.getWindow()).setAttributes(lp);
-    }
-
     public static void isFavorite(final ImageView add, final String Id, final String UserId) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child(FAVORITES).child(UserId);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child(DATA.FAVORITES).child(UserId);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -431,23 +282,23 @@ public class VOID {
 
     public static void checkFavorite(ImageView image, String bookId) {
         if (image.getTag().equals("add")) {
-            FirebaseDatabase.getInstance().getReference().child(FAVORITES).child(FirebaseUserUid)
+            FirebaseDatabase.getInstance().getReference().child(DATA.FAVORITES).child(DATA.FirebaseUserUid)
                     .child(bookId).setValue(true);
         } else {
-            FirebaseDatabase.getInstance().getReference().child(FAVORITES).child(FirebaseUserUid)
+            FirebaseDatabase.getInstance().getReference().child(DATA.FAVORITES).child(DATA.FirebaseUserUid)
                     .child(bookId).removeValue();
         }
     }
 
     public static void checkLove(ImageView image, String bookId) {
         if (image.getTag().equals("love")) {
-            FirebaseDatabase.getInstance().getReference().child(LOVES).child(bookId)
-                    .child(FirebaseUserUid).setValue(true);
-            VOID.incrementBookLovesCount(bookId);
+            FirebaseDatabase.getInstance().getReference().child(DATA.LOVES).child(bookId)
+                    .child(DATA.FirebaseUserUid).setValue(true);
+            incrementItemCount(DATA.BOOKS, bookId, DATA.LOVES_COUNT);
         } else {
-            FirebaseDatabase.getInstance().getReference().child(LOVES).child(bookId)
-                    .child(FirebaseUserUid).removeValue();
-            VOID.incrementBookLovesRemoveCount(bookId);
+            FirebaseDatabase.getInstance().getReference().child(DATA.LOVES).child(bookId)
+                    .child(DATA.FirebaseUserUid).removeValue();
+            incrementItemRemoveCount(DATA.BOOKS, bookId, DATA.LOVES_COUNT);
         }
     }
 
@@ -466,11 +317,11 @@ public class VOID {
             //handle dialog option click
             if (which == 0) {
                 //Edit clicked ,Open new activity to edit the book info
-                IntentExtra(context, CLASS.BOOK_EDIT, BOOK_ID, bookId);
+                IntentExtra(context, CLASS.BOOK_EDIT, DATA.BOOK_ID, bookId);
             } else if (which == 1) {
                 //Delete Clicked
-                dialogOptionDelete(context, EMPTY + publisher, EMPTY + bookId,
-                        EMPTY + bookUrl, EMPTY + bookTitle, false, false, null, null);
+                dialogOptionDelete(context, DATA.EMPTY + publisher, DATA.EMPTY + bookId,
+                        DATA.EMPTY + bookUrl, DATA.EMPTY + bookTitle, false, false, null, null);
             }
         }).show();
     }
@@ -492,18 +343,18 @@ public class VOID {
                 VOID.IntentExtra(context, CLASS.CATEGORY_EDIT, DATA.CATEGORY_ID, id);
             } else if (which == 1) {
                 //Delete Clicked
-                dialogOptionDelete(context, EMPTY + publisher, null,
-                        null, null, true, false, EMPTY + id, EMPTY + name);
+                dialogOptionDelete(context, DATA.EMPTY + publisher, null,
+                        null, null, true, false, DATA.EMPTY + id, DATA.EMPTY + name);
             }
         }).show();
     }
 
     public static void isLoves(ImageView image, String bookId) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child(LOVES).child(bookId);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child(DATA.LOVES).child(bookId);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(FirebaseUserUid).exists()) {
+                if (dataSnapshot.child(DATA.FirebaseUserUid).exists()) {
                     image.setImageResource(R.drawable.ic_heart_selected);
                     image.setTag("loved");
                 } else {
@@ -520,7 +371,7 @@ public class VOID {
     }
 
     public static void nrLoves(TextView number, String bookId) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child(LOVES).child(bookId);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child(DATA.LOVES).child(bookId);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

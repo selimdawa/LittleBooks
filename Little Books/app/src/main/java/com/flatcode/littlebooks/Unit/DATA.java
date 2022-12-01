@@ -46,6 +46,7 @@ public class DATA {
     public static String AD_LOAD = "adLoad";
     //Others
     public static String DOT = ".";
+    public static int ZERO = 0;
     public static int CURRENT_VERSION = 1;
     public static int SPLASH_TIME = 2000;
     public static int ITEM_DOUBLE = 20;

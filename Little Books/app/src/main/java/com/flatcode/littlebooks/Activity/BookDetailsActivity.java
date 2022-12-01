@@ -100,13 +100,14 @@ public class BookDetailsActivity extends AppCompatActivity {
     private void init() {
         loadBookDetails();
         loadComments();
-        VOID.incrementBookViewCount(bookId);
+        VOID.incrementItemCount(DATA.BOOKS, bookId, DATA.VIEWS_COUNT);
         VOID.isLoves(binding.love, bookId);
         VOID.nrLoves(binding.loves, bookId);
         VOID.isFavorite(binding.favorite, bookId, DATA.FirebaseUserUid);
     }
 
     private void loadComments() {
+        list = new ArrayList<>();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(DATA.BOOKS);
         ref.child(bookId).child(DATA.COMMENTS).addValueEventListener(new ValueEventListener() {
             @Override
@@ -116,6 +117,7 @@ public class BookDetailsActivity extends AppCompatActivity {
                     Comment comment = data.getValue(Comment.class);
                     list.add(comment);
                 }
+
                 adapter.notifyDataSetChanged();
                 if (list.isEmpty())
                     binding.textComment.setVisibility(View.GONE);

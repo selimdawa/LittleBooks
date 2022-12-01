@@ -129,13 +129,12 @@ public class BookAddActivity extends AppCompatActivity {
         hashMap.put(DATA.IMAGE, DATA.EMPTY + DATA.BASIC);
 
         //db reference: DB > Books
-
         assert id != null;
         ref.child(id).setValue(hashMap).addOnSuccessListener(unused -> {
             dialog.dismiss();
             Toast.makeText(context, "Successfully uploaded...", Toast.LENGTH_SHORT).show();
         }).addOnCompleteListener(task -> {
-            VOID.incrementBooksPublisherCount(DATA.FirebaseUserUid);
+            VOID.incrementItemCount(DATA.USERS, DATA.FirebaseUserUid, DATA.BOOKS_COUNT);
             uploadImage(id);
         }).addOnFailureListener(e -> {
             dialog.dismiss();

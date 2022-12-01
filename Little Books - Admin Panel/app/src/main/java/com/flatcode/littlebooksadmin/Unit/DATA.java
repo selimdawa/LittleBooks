@@ -48,6 +48,7 @@ public class DATA {
     public static String ALL = "all";
     public static String USER = "user";
     public static String DOT = ".";
+    public static int ZERO = 0;
     public static int SPLASH_TIME = 2000;
     public static int ITEM_DOUBLE = 20;
     public static int MAX_BYTES_PDF = 50000000; // Here Max Size PDF 50MB
