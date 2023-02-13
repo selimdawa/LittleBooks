@@ -61,7 +61,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database'             //Firebase Database
     implementation 'com.google.firebase:firebase-storage'              //Firebase Storage
     implementation 'com.google.firebase:firebase-analytics'            //Firebase Analytics
-    implementation 'com.google.firebase:firebase-crashlytics'          //Firebase Crashlytics
+    //implementation 'com.google.firebase:firebase-crashlytics'          //Firebase Crashlytics
     //Ads
     implementation 'com.google.android.gms:play-services-ads:21.3.0'   //ADs Google AdMob
     //Pdf

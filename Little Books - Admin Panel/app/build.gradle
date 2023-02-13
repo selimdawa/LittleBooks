@@ -53,7 +53,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database'             //Firebase Database
     implementation 'com.google.firebase:firebase-storage'              //Firebase Storage
     implementation 'com.google.firebase:firebase-analytics'            //Firebase Analytics
-    implementation 'com.google.firebase:firebase-crashlytics'          //Firebase Crashlytics
+    //implementation 'com.google.firebase:firebase-crashlytics'          //Firebase Crashlytics
     //Pdf
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'      //Pdf view
     //Image
